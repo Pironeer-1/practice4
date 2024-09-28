@@ -7,7 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface TopicJpaRepositoryV1 extends JpaRepository<Topic, Long> {
+public interface TopicJpaRepositoryV2 extends JpaRepository<Topic, Long>, TopicRepositoryV2 {
+    @Override
     @Query(value = "SELECT * FROM topic WHERE id >= :cursorId", nativeQuery = true)
     List<Topic> findByCursorId(@Param("cursorId") Long cursorId);
 }

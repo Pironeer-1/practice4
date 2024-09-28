@@ -6,9 +6,8 @@ import com.pironeer.week4.topic.dto.response.TopicResponse;
 import com.pironeer.week4.topic.dto.response.TopicSliceResponse;
 import com.pironeer.week4.topic.mapper.TopicMapper;
 import com.pironeer.week4.comment.repository.CommentRepository;
-import com.pironeer.week4.topic.repository.TopicJpaRepositoryV1;
-import com.pironeer.week4.topic.repository.TopicRepository;
 import com.pironeer.week4.topic.entity.Topic;
+import com.pironeer.week4.topic.repository.TopicRepositoryV2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TopicService {
-    private final TopicJpaRepositoryV1 topicRepository;
+    private final TopicRepositoryV2 topicRepository;
     private final CommentRepository commentRepository;
 
     public void save(TopicCreateRequest request) {

@@ -8,6 +8,7 @@ import com.pironeer.week4.comment.repository.CommentRepository;
 import com.pironeer.week4.topic.repository.TopicRepository;
 import com.pironeer.week4.comment.entity.Comment;
 import com.pironeer.week4.topic.entity.Topic;
+import com.pironeer.week4.topic.repository.TopicRepositoryV2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Service
 @RequiredArgsConstructor
 public class CommentService {
-    private final TopicRepository topicRepository;
+    private final TopicRepositoryV2 topicRepository;
     private final CommentRepository commentRepository;
 
     public void save(CommentCreateRequest request) {

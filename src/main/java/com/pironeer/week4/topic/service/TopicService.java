@@ -1,5 +1,6 @@
 package com.pironeer.week4.topic.service;
 
+import com.pironeer.week4.comment.repository.CommentRepositoryV3;
 import com.pironeer.week4.topic.dto.request.TopicCreateRequest;
 import com.pironeer.week4.topic.dto.request.TopicUpdateRequest;
 import com.pironeer.week4.topic.dto.response.TopicResponse;
@@ -8,6 +9,7 @@ import com.pironeer.week4.topic.mapper.TopicMapper;
 import com.pironeer.week4.comment.repository.CommentRepository;
 import com.pironeer.week4.topic.entity.Topic;
 import com.pironeer.week4.topic.repository.TopicRepositoryV3;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TopicService {
     private final TopicRepositoryV3 topicRepository;
-    private final CommentRepository commentRepository;
+    private final CommentRepositoryV3 commentRepository;
 
     public void save(TopicCreateRequest request) {
         topicRepository.save(TopicMapper.from(request));
@@ -50,6 +52,7 @@ public class TopicService {
         return TopicSliceResponse.of(topicResponses, cursorId, hasNext);
     }
 
+    @Transactional
     public TopicResponse update(TopicUpdateRequest request) {
         Topic topic = topicRepository.findById(request.id())
                 .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
@@ -57,6 +60,7 @@ public class TopicService {
         return TopicResponse.of(topic);
     }
 
+    @Transactional
     public void deleteById(Long id) {
         commentRepository.deleteByTopicId(id);
         topicRepository.deleteById(id);

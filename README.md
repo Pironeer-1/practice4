@@ -1,6 +1,6 @@
 # practice4
 
-3주차 세션 실습
+4주차 세션 실습
 
 [세션 자료](https://even-channel-ff2.notion.site/JPA-10e4134020d580b89349ca6813d920a7?pvs=4)
 

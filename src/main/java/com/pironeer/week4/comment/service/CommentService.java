@@ -6,8 +6,10 @@ import com.pironeer.week4.comment.dto.response.CommentResponse;
 import com.pironeer.week4.comment.mapper.CommentMapper;
 import com.pironeer.week4.comment.repository.CommentRepository;
 import com.pironeer.week4.comment.entity.Comment;
+import com.pironeer.week4.comment.repository.CommentRepositoryV3;
 import com.pironeer.week4.topic.entity.Topic;
 import com.pironeer.week4.topic.repository.TopicRepositoryV3;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @RequiredArgsConstructor
 public class CommentService {
     private final TopicRepositoryV3 topicRepository;
-    private final CommentRepository commentRepository;
+    private final CommentRepositoryV3 commentRepository;
 
     public void save(CommentCreateRequest request) {
         Topic topic = topicRepository.findById(request.topicId())
@@ -50,6 +52,7 @@ public class CommentService {
         return result;
     }
 
+    @Transactional
     public CommentResponse update(CommentUpdateRequest request) {
         Comment comment = commentRepository.findById(request.id())
                 .orElseThrow(() -> new RuntimeException("COMMENT NOT FOUND"));
@@ -57,6 +60,7 @@ public class CommentService {
         return CommentResponse.of(comment);
     }
 
+    @Transactional
     public void deleteById(Long id) {
         commentRepository.deleteByParentId(id);
         commentRepository.deleteById(id);

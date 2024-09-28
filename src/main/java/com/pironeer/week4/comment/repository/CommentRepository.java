@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Repository
+//@Repository
 public class CommentRepository {
     private final AtomicLong commentIdxGenerator = new AtomicLong(0);
     private final Map<Long, Comment> commentMap = new HashMap<>();

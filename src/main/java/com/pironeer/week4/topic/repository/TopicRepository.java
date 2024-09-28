@@ -11,11 +11,11 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 //@Repository
-public class TopicRepository implements TopicRepositoryV2 {
+public class TopicRepository implements TopicRepositoryV3 {
     private final AtomicLong topicIdxGenerator = new AtomicLong(0);
     private final Map<Long, Topic> topicMap = new HashMap<>();
 
-    public Topic save(Topic topic) {
+    public void save(Topic topic) {
         if(topic.getId() == null) {
             Long id = topicIdxGenerator.incrementAndGet();
             topic.setId(id);
@@ -23,7 +23,6 @@ public class TopicRepository implements TopicRepositoryV2 {
         } else {
             topicMap.replace(topic.getId(), topic);
         }
-        return topic;
     }
 
     public Optional<Topic> findById(Long id) {

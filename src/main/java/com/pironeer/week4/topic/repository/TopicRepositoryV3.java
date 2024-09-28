@@ -5,8 +5,8 @@ import com.pironeer.week4.topic.entity.Topic;
 import java.util.List;
 import java.util.Optional;
 
-public interface TopicRepositoryV2 {
-    Topic save(Topic topic);
+public interface TopicRepositoryV3 {
+    void save(Topic topic);
 
     Optional<Topic> findById(Long id);
 
